@@ -1,4 +1,6 @@
-.board-container {
+/*Size of the whole board*/
+
+.board-card {
     height: 370px;
     width: 370px;
 }
@@ -7,12 +9,27 @@
     height: 100%;
 }
 
+
+/*the contanier for the card.
+It will have a face container div to allow holding the two faces of the card.
+we will play with the size of the face-container and the top to conntrol which face is visible.*/
+
 .board-card {
     border: 2px solid#F7F7F7;
     height: 25%;
     padding: 0;
     overflow: hidden;
 }
+
+
+/*This class is for a div in each car.
+It holds the two faces of the card. Has double the height of its parent (the borad-card);
+This is done so to allow it to hold the two faces but the second face will be overflowing.
+Iitially, top is at 0 allowing the facedonw div to be visible.
+We control wich face is visible by applying or removing the flipped class.
+When flipped is applied, the face-up div is moved up.
+When we remove flipped from this div, the top becomes zero (second priority or the cascade).
+Face down is shown back.*/
 
 .face-container {
     height: 200%;
@@ -22,16 +39,34 @@
     transition: 400ms;
 }
 
-.faceup,
+
+/*face up and face down divs will always have 50% hieght of their parebnt which is the fac-container div
+*/
+
+.board-card,
 .facedown {
     height: 50%;
 }
+
+
+/* this class is for the div that represent the card face downn
+It always has the clear gray color */
 
 .facedown {
     background-color: #D0D0D0;
 }
 
+
+/* this class is for the div that represent the card face up
+Its unique property will be the background color that comes
+from applying the color-xx class to the element */
+
 .faceup {}
+
+
+/*when the card is flipped it is assigned this class.
+It have top set to -100% of parent so that it appears fully at the top of its parent.
+This ensure shifting up the face up part of the card to become visible in the parent (face-container)*/
 
 .flipped .face-container {
     top: -100%;
