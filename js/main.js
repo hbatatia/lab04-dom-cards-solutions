@@ -78,11 +78,13 @@ function Card(element, index) {
   };
 }
 
+var timer;
+
 function startTimer() {
   var minutesLabel = document.getElementById("minutes");
   var secondsLabel = document.getElementById("seconds");
   var totalSeconds = 0;
-  setInterval(setTime, 1000);
+  timer = setInterval(setTime, 1000);
 
   function setTime() {
     ++totalSeconds;
@@ -98,6 +100,10 @@ function startTimer() {
       return valString;
     }
   }
+}
+
+function stopTimer() {
+  clearInterval(timer);
 }
 
 function createAllCards() {
@@ -255,6 +261,15 @@ function handleCardFlipped(card) {
     document.getElementsByClassName(
       "score"
     )[0].innerHTML = `Score : ${correctPairs}/${numberOfCards / 2}`;
+    if (correctPairs === numberOfCards / 2) {
+      stopTimer();
+      //game is won
+      alert(
+        `You won! Time taken: ${
+          document.getElementsByClassName('time').innerHTML
+        }`
+      );
+    }
 
     //your code for managing scores must go here
   } else {
