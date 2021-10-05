@@ -1,6 +1,9 @@
 const boardCards = []; //the array of card objects of type Card
 const numberOfCards = 16; //total number of cards
 const cardPairs = []; //array of pairs of cards used only for pairing
+var correctPairs = 0; // Counts the number of correct pairs already matched
+
+document.getElementsByClassName('score')[0].innerHTML = `Score : ${correctPairs}/${numberOfCards / 2}`;
 //represent a JavaScript object associted with the div actually showing the card in the HTML
 function Card(element, index) {
     this.element = element; //the div tag element of the card (board-card div)
@@ -137,7 +140,7 @@ function createRandomCardPairs() {
         var card2;
         var colorIndex;
         do {
-            //oop until we get a card that has not been assigned to a pair
+            //loop until we get a card that has not been assigned to a pair
             var card1Index = Math.floor(Math.random() * 16); //generate random index of the card
             card1 = getCardByNum(card1Index);
         } while (isPaired(card1));
@@ -170,7 +173,7 @@ function isPaired(card) {
 }
 
 function isUsed(candidateColorIndex) {
-    //check if the color has alreay been allocated to a pair
+    //check if the color has already been allocated to a pair
     for (let i = 0; i < cardPairs.length; i++) {
         let colorIndex = Number(cardPairs[i].colorClass.split("-")[1]);
         if (colorIndex === candidateColorIndex) return true;
@@ -210,6 +213,9 @@ function handleCardFlipped(card) {
         firstFaceupCard.matchFound();
         card.matchFound();
         firstFaceupCard = null; //forget the first card clicked to allow creating a new pair
+        correctPairs++;
+        console.log(`correct pairs: ${correctPairs}`);
+        document.getElementsByClassName('score')[0].innerHTML = `Score : ${correctPairs}/${numberOfCards / 2}`;
 
         //your code for managing scores must go here
     } else {
