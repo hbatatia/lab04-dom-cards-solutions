@@ -118,6 +118,15 @@ This ensure shifting up the face up part of the card to become visible in the pa
     position: absolute;
     top: 10px;
     left: 10px;
+    font-size: 2rem;
+    z-index: 1;
+}
+.time {
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    font-size: 2rem;
+    z-index: 1;
 }
 
 @media screen and (max-width: 600px) {
